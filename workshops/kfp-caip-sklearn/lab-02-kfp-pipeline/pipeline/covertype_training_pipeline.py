@@ -19,6 +19,7 @@ from helper_components import evaluate_model
 from helper_components import retrieve_best_run
 from jinja2 import Template
 import kfp
+import kfp.components as comp
 from kfp.components import func_to_container_op
 from kfp.dsl.types import Dict
 from kfp.dsl.types import GCPProjectID
@@ -89,9 +90,9 @@ def generate_sampling_query(source_table_name, num_lots, lots):
 component_store = kfp.components.ComponentStore(
     local_search_paths=None, url_search_prefixes=[COMPONENT_URL_SEARCH_PREFIX])
 
-bigquery_query_op = component_store.load_component('bigquery/query')
-mlengine_train_op = component_store.load_component('ml_engine/train')
-mlengine_deploy_op = component_store.load_component('ml_engine/deploy')
+bigquery_query_op = comp.load_component_from_url('https://raw.githubusercontent.com/kubeflow/pipelines/0.2.5/components/gcp/bigquery/query/component.yaml')
+mlengine_train_op = comp.load_component_from_url('https://raw.githubusercontent.com/kubeflow/pipelines/0.2.5/components/gcp/ml_engine/train/component.yaml')
+mlengine_deploy_op = comp.load_component_from_url('https://raw.githubusercontent.com/kubeflow/pipelines/0.2.5/components/gcp/ml_engine/deploy/component.yaml')
 retrieve_best_run_op = func_to_container_op(
     retrieve_best_run, base_image=BASE_IMAGE)
 evaluate_model_op = func_to_container_op(evaluate_model, base_image=BASE_IMAGE)
