@@ -168,7 +168,7 @@ def covertype_train(project_id,
 
     job_dir = '{}/{}/{}'.format(gcs_root, 'jobdir/hypertune',
                                 kfp.dsl.RUN_ID_PLACEHOLDER)
-
+    
     # NOTE: Based on [this](https://github.com/kubeflow/pipelines/blob/0.2.5/components/gcp/ml_engine/train/component.yaml#L47)
     # 'job_dir' is passed to the program as 'job-dir' CLI argument. Now, 'fire' module automatically converts
     # 'job-dir' CLI argument to 'job_dir' and passes it to the 'train_evaluate' function as argument. Hence, we are not explictly 
@@ -186,7 +186,11 @@ def covertype_train(project_id,
             project_id, hypertune.outputs['job_id'])
 
     # Train the model on a combined training and validation datasets
+    # NOTE: kfp.dsl.RUN_ID_PLACEHOLDER returns the runId of the current run. It is the  
+    # same ID returned when you run pipeline with 'kfp --endpoint $ENDPOINT run submit' command.
     job_dir = '{}/{}/{}'.format(gcs_root, 'jobdir', kfp.dsl.RUN_ID_PLACEHOLDER)
+    
+    
 
     train_args = [
         '--training_dataset_path',
