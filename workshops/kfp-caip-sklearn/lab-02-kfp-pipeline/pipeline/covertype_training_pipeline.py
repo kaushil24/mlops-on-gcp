@@ -169,6 +169,10 @@ def covertype_train(project_id,
     job_dir = '{}/{}/{}'.format(gcs_root, 'jobdir/hypertune',
                                 kfp.dsl.RUN_ID_PLACEHOLDER)
 
+    # NOTE: Based on [this](https://github.com/kubeflow/pipelines/blob/0.2.5/components/gcp/ml_engine/train/component.yaml#L47)
+    # 'job_dir' is passed to the program as 'job-dir' CLI argument. Now, 'fire' module automatically converts
+    # 'job-dir' CLI argument to 'job_dir' and passes it to the 'train_evaluate' function as argument. Hence, we are not explictly 
+    # passing 'job_dir' argument while we invoke the 'train_evaluate' function in trainer_image/train.py
     hypertune = mlengine_train_op(
         project_id=project_id,
         region=region,
