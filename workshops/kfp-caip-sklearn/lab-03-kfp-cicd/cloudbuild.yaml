@@ -31,7 +31,7 @@ steps:
   dir: $_PIPELINE_FOLDER/base_image
 
 # Compile the pipeline
-- name: 'gcr.io/$PROJECT_ID/kfp-cli'
+- name: 'gcr.io/$PROJECT_ID/$_KFP_CLI_IMAGE_NAME'
   args:
   - '-c'
   - |
@@ -46,7 +46,7 @@ steps:
   dir: $_PIPELINE_FOLDER/pipeline
   
  # Upload the pipeline
-- name: 'gcr.io/$PROJECT_ID/kfp-cli'
+- name: 'gcr.io/$PROJECT_ID/$_KFP_CLI_IMAGE_NAME'
   args:
   - '-c'
   - |
