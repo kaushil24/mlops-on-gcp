@@ -64,6 +64,7 @@
 	```
 	!dsl-compile --py pipeline_python_file.py --output pipeline_python_file.yaml
 	```
+	Compiling a pipeline means transforming your pipelone's Python code into a static configuration (YAML).
 	
 	### Deploying pipeline package
 	* `ENDPOINT` set the ENDPOINT constant to the endpoint to your AI Platform Pipelines instance. Then endpoint to the [AI Platform Pipelines](https://console.cloud.google.com/ai-platform/pipelines/clusters) instance can be found on the AI Platform Pipelines page in the Google Cloud Console.
